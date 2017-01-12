@@ -20,7 +20,6 @@
 
 #include "std_file_utils.h"
 #include <unistd.h>
-#define GASHACK
 
 #define STD_MAX_EINTR (10)
 
@@ -30,11 +29,7 @@
 
 typedef ssize_t (*fo)(int fd, void *data, size_t len);
 
-#ifdef GASHACK
 static inline bool is_errno(int rc, int id) {
-#else
-inline bool is_errno(int rc, int id) {
-#endif
     return rc==-1 && errno==id;
 }
 

@@ -27,7 +27,6 @@
 #include <unistd.h>
 #include <netinet/in.h>
 #include "std_bit_masks.h"
-#define GASHACK
 
 static inline unsigned int bittobytelen(unsigned int len) {
     return (len/8) + ((len%8)==0 ? 0 : 1);
@@ -101,20 +100,12 @@ static int lowest_bit[] = {
     5,1,2,1,3,1,2,1,4,1,2,1,3,1,2,1,            //f0
 };
 
-#ifdef GASHACK
 static inline unsigned int std_find_last_bit8(register unsigned int byte, register unsigned int from) {
-#else
-inline unsigned int std_find_last_bit8(register unsigned int byte, register unsigned int from) {
-#endif
     register unsigned int mask = ((unsigned int )(~0)) >> from;
     return highest_bit[byte&mask];
 }
 
-#ifdef GASHACK
 static inline unsigned int std_find_first_bit8(register unsigned int byte, register unsigned int from) {
-#else
-inline unsigned int std_find_first_bit8(register unsigned int byte, register unsigned int from) {
-#endif
     register unsigned int mask = ((unsigned int )(~0)) << from;
     return lowest_bit[byte&mask];
 }
